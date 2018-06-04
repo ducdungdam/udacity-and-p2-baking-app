@@ -1,6 +1,8 @@
 package com.ducdungdam.bakingapp.model;
 
-import com.google.gson.annotations.SerializedName;
+import android.os.Parcel;
+import android.os.Parcelable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,14 +11,45 @@ import java.util.List;
  * POJO of Recipe retrieving by {@link com.ducdungdam.bakingapp.data.RecipeRepository}
  */
 
-public class Recipe {
+public class Recipe implements Parcelable{
 
   private int id;
   private String name;
-  private List<Ingredient> ingredients = null;
-  private List<Step> steps = null;
-  private Integer servings;
+  private List<Ingredient> ingredients;
+  private List<Step> steps;
+  private int servings;
   private String image;
+
+  private Recipe(Parcel in) {
+    id = in.readInt();
+    name = in.readString();
+    if (in.readByte() == 0x01) {
+      ingredients = new ArrayList<>();
+      in.readList(ingredients, Ingredient.class.getClassLoader());
+    } else {
+      ingredients = null;
+    }
+    if (in.readByte() == 0x01) {
+      steps = new ArrayList<>();
+      in.readList(steps, Step.class.getClassLoader());
+    } else {
+      steps = null;
+    }
+    servings = in.readInt();
+    image = in.readString();
+  }
+
+  public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
+    @Override
+    public Recipe createFromParcel(Parcel in) {
+      return new Recipe(in);
+    }
+
+    @Override
+    public Recipe[] newArray(int size) {
+      return new Recipe[size];
+    }
+  };
 
   public int getId() {
     return id;
@@ -42,52 +75,28 @@ public class Recipe {
     return image;
   }
 
-  class Ingredient {
-
-    private float quantity;
-    private String measure;
-    @SerializedName("ingredient")
-    private String name;
-
-    public float getQuantity() {
-      return quantity;
-    }
-
-    public String getMeasure() {
-      return measure;
-    }
-
-    public String getName() {
-      return name;
-    }
+  @Override
+  public int describeContents() {
+    return 0;
   }
 
-  class Step {
-
-    private Integer id;
-    private String shortDescription;
-    private String description;
-    private String videoURL;
-    private String thumbnailURL;
-
-    public Integer getId() {
-      return id;
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeInt(id);
+    dest.writeString(name);
+    if (ingredients == null) {
+      dest.writeByte((byte) (0x00));
+    } else {
+      dest.writeByte((byte) (0x01));
+      dest.writeList(ingredients);
     }
-
-    public String getShortDescription() {
-      return shortDescription;
+    if (steps == null) {
+      dest.writeByte((byte) (0x00));
+    } else {
+      dest.writeByte((byte) (0x01));
+      dest.writeList(steps);
     }
-
-    public String getDescription() {
-      return description;
-    }
-
-    public String getVideoURL() {
-      return videoURL;
-    }
-
-    public String getThumbnailURL() {
-      return thumbnailURL;
-    }
+    dest.writeInt(servings);
+    dest.writeString(image);
   }
 }

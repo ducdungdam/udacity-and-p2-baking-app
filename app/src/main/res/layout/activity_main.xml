@@ -6,5 +6,7 @@
     android:id="@+id/rv_recipe_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/horizontal_spacing"
+    android:paddingRight="@dimen/horizontal_spacing"
     app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 </layout>

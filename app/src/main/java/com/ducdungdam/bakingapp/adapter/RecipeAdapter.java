@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import com.ducdungdam.bakingapp.R;
 import com.ducdungdam.bakingapp.databinding.ViewRecipeListItemBinding;
@@ -13,7 +14,9 @@ import com.ducdungdam.bakingapp.model.Recipe;
 import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
-  List<Recipe> recipes = null;
+
+  private List<Recipe> recipes;
+  private OnItemClickListener onItemClickListener = null;
 
   public RecipeAdapter(List<Recipe> recipes) {
     super();
@@ -35,7 +38,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   @Override
   public int getItemCount() {
-    if(recipes == null) {
+    if (recipes == null) {
       return 0;
     } else {
       return recipes.size();
@@ -47,7 +50,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
     notifyDataSetChanged();
   }
 
-  class RecipeViewHolder extends ViewHolder {
+  public void setOnItemClickListener(OnItemClickListener l) {
+    this.onItemClickListener = l;
+  }
+
+  public interface OnItemClickListener {
+
+    void onItemClick(Recipe recipe);
+  }
+
+  class RecipeViewHolder extends ViewHolder implements OnClickListener {
+
     ViewRecipeListItemBinding rootView;
 
     RecipeViewHolder(View itemView) {
@@ -57,6 +70,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private void bind(Recipe recipe) {
       rootView.setRecipe(recipe);
+      rootView.getRoot().setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+      if (onItemClickListener != null) {
+        onItemClickListener.onItemClick(rootView.getRecipe());
+      }
     }
   }
 }
