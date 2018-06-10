@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <dimen name="spacing_normal">8dp</dimen>
   <dimen name="horizontal_spacing">8dp</dimen>
+  <dimen name="horizontal_spacing_large">16dp</dimen>
+  <dimen name="vertical_spacing_large">16dp</dimen>
   <dimen name="vertical_spacing">8dp</dimen>
 
   <dimen name="recipe_item_spacing">8dp</dimen>
   <dimen name="recipe_item_height">200dp</dimen>
+
+  <dimen name="detail_app_bar_height">200dp</dimen>
+  <dimen name="detail_ingredient_quantity_width">100dp</dimen>
+
+  <dimen name="master_flow_width">400dp</dimen>
+
+  <dimen name="vertical_divider_width">1dp</dimen>
+  <dimen name="horizontal_divider_height">1dp</dimen>
+
+
 </resources>

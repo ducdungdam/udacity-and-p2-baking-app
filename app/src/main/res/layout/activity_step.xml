@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <data>
+    <import type="android.view.View"/>
+    <variable
+      name="currentPosition"
+      type="int"/>
+    <variable
+      name="totalCount"
+      type="int"/>
+    <variable
+      name="step"
+      type="com.ducdungdam.bakingapp.model.Step"/>
+  </data>
+  <android.support.design.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.design.widget.AppBarLayout
+      android:id="@+id/app_bar_layout"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/detail_app_bar_height"
+      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+      <android.support.design.widget.CollapsingToolbarLayout
+        android:id="@+id/collapsing_toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:contentScrim="@color/colorPrimaryDark"
+        app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+        app:title="@{step.shortDescription}">
+        <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:contentDescription="@string/step_image_description"
+          android:scaleType="centerCrop"
+          android:src="@drawable/img_recipe_card"
+          app:layout_collapseMode="parallax"/>
+        <android.support.v7.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="?android:attr/actionBarSize"
+          android:gravity="top"
+          app:layout_collapseMode="pin"/>
+      </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fillViewport="true"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior">
+      <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <FrameLayout
+          android:id="@+id/step_container"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+        <TextView
+          android:id="@+id/tv_previous_step"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/vertical_spacing_large"
+          android:layout_marginBottom="@dimen/vertical_spacing_large"
+          android:layout_marginStart="@dimen/horizontal_spacing"
+          android:layout_marginEnd="@dimen/horizontal_spacing"
+          android:text="@string/step_previous_text"
+          android:textAlignment="center"
+          android:visibility="@{currentPosition == 0 ? View.GONE : View.VISIBLE}"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/step_container"
+          app:layout_constraintVertical_bias="0.0"/>
+      </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <Button
+      android:id="@+id/btn_next_step"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/spacing_normal"
+      android:layout_gravity="center_horizontal|bottom"
+      android:text="@string/step_next_text"
+      android:visibility="@{currentPosition == (totalCount - 1) ? View.GONE : View.VISIBLE}"
+      app:layout_behavior="com.ducdungdam.bakingapp.widget.NextStepButtonBehavior"/>
+  </android.support.design.widget.CoordinatorLayout>
+</layout>

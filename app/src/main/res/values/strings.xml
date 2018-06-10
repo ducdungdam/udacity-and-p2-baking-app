@@ -1,3 +1,13 @@
 <resources>
   <string name="app_name">Baking App</string>
+
+  <string name="title_ingredient">Ingredient</string>
+  <string name="title_steps">Steps</string>
+
+  <string name="recipe_image_description">Image of recipe</string>
+  <string name="step_image_description">Image of step</string>
+  <string name="detail_steps_arrow_description">Icon go to step</string>
+
+  <string name="step_previous_text">Missed something?\nGo Back to previous step</string>
+  <string name="step_next_text">Next step</string>
 </resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <variable
+      name="step"
+      type="com.ducdungdam.bakingapp.model.Step"/>
+  </data>
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/spacing_normal"
+      android:text="@{step.shortDescription}"
+      app:layout_constraintBottom_toBottomOf="@+id/iv_goto"
+      app:layout_constraintEnd_toStartOf="@+id/iv_goto"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/iv_goto"
+      tools:text="Description"/>
+    <ImageView
+      android:id="@+id/iv_goto"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/spacing_normal"
+      android:src="@drawable/ic_right"
+      android:contentDescription="@string/detail_steps_arrow_description"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+  </android.support.constraint.ConstraintLayout>
+</layout>

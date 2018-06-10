@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <import type="java.lang.Float"/>
+    <variable
+      name="ingredient"
+      type="com.ducdungdam.bakingapp.model.Ingredient"/>
+  </data>
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+      android:id="@+id/tv_ingredient_quantity"
+      android:layout_width="@dimen/detail_ingredient_quantity_width"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/horizontal_spacing"
+      android:text="@{Float.toString(ingredient.quantity) + ` ` + ingredient.measure}"
+      app:layout_constraintStart_toStartOf="parent"
+      tools:text="500 g"/>
+    <TextView
+      android:id="@+id/tv_ingredient_name"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/horizontal_spacing"
+      android:layout_marginEnd="@dimen/horizontal_spacing"
+      android:text="@{ingredient.name}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/tv_ingredient_quantity"
+      tools:text="Vanilla"/>
+
+  </android.support.constraint.ConstraintLayout>
+</layout>

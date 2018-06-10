@@ -7,8 +7,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.Toast;
 import com.ducdungdam.bakingapp.R;
 import com.ducdungdam.bakingapp.adapter.RecipeAdapter;
 import com.ducdungdam.bakingapp.adapter.RecipeAdapter.OnItemClickListener;
@@ -38,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
             adapter.setOnItemClickListener(new OnItemClickListener() {
               @Override
               public void onItemClick(Recipe recipe) {
-                Log.d("DUNG", "onItemClick: "+recipe.getName());
-                Log.d("DUNG", "onItemClick: "+recipe.getIngredients().get(0).getName());
-                Toast.makeText(MainActivity.this, recipe.getName(), Toast.LENGTH_SHORT).show();
                 startDetailActivity(recipe);
               }
             });
