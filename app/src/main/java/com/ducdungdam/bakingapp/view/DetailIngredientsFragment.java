@@ -14,7 +14,7 @@ import com.ducdungdam.bakingapp.adapter.IngredientDetailAdapter;
 import com.ducdungdam.bakingapp.databinding.FragmentDetailIngredientsBinding;
 import com.ducdungdam.bakingapp.model.Recipe;
 import com.ducdungdam.bakingapp.viewmodel.DetailViewModel;
-import com.ducdungdam.bakingapp.widget.RecipeItemDecoration;
+import com.ducdungdam.bakingapp.widget.IngredientItemDecoration;
 
 public class DetailIngredientsFragment extends Fragment {
 
@@ -37,7 +37,7 @@ public class DetailIngredientsFragment extends Fragment {
         IngredientDetailAdapter adapter = new IngredientDetailAdapter(
             recipe.getIngredients());
         rootView.rvIngredientList.setAdapter(adapter);
-        rootView.rvIngredientList.addItemDecoration(new RecipeItemDecoration(getContext()));
+        rootView.rvIngredientList.addItemDecoration(new IngredientItemDecoration(getContext()));
       }
     });
 

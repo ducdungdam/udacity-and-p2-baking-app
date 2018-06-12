@@ -16,7 +16,7 @@ import com.ducdungdam.bakingapp.databinding.FragmentDetailStepsBinding;
 import com.ducdungdam.bakingapp.model.Recipe;
 import com.ducdungdam.bakingapp.model.Step;
 import com.ducdungdam.bakingapp.viewmodel.DetailViewModel;
-import com.ducdungdam.bakingapp.widget.RecipeItemDecoration;
+import com.ducdungdam.bakingapp.widget.StepItemDecoration;
 import java.util.List;
 
 public class DetailStepsFragment extends Fragment implements OnClickListener {
@@ -43,7 +43,7 @@ public class DetailStepsFragment extends Fragment implements OnClickListener {
             model.getRecipe().getValue().getSteps());
         adapter.setOnClickListener(DetailStepsFragment.this);
         rootView.rvStepsList.setAdapter(adapter);
-        rootView.rvStepsList.addItemDecoration(new RecipeItemDecoration(getContext()));
+        rootView.rvStepsList.addItemDecoration(new StepItemDecoration(getContext()));
       }
     });
 

@@ -26,11 +26,12 @@
       tools:text="Description"/>
     <ImageView
       android:id="@+id/iv_goto"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_width="32dp"
+      android:layout_height="32dp"
       android:layout_margin="@dimen/spacing_normal"
-      android:src="@drawable/ic_right"
+      android:padding="@dimen/spacing_normal"
       android:contentDescription="@string/detail_steps_arrow_description"
+      android:src="@drawable/ic_right"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"/>

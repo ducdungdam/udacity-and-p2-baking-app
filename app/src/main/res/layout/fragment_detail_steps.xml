@@ -6,9 +6,6 @@
     android:id="@+id/rv_steps_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="bottom"
-    android:paddingLeft="@dimen/horizontal_spacing"
-    android:paddingRight="@dimen/horizontal_spacing"
     android:fillViewport="true"
     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
