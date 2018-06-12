@@ -55,7 +55,6 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
     viewModel.getCurrentPosition().observe(this, new Observer<Integer>() {
       @Override
       public void onChanged(@Nullable Integer currentPosition) {
-        Log.d("DUNG", "onChanged: hier bin ich");
         if (viewModel.getSteps().getValue() == null || currentPosition == null
             || viewModel.getSteps().getValue().get(currentPosition) == null) {
           return;
@@ -64,8 +63,8 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
         Step step = viewModel.getSteps().getValue().get(currentPosition);
         rootView.setStep(step);
 
+        releasePlayer();
         if (step.getVideoURL() != null && !step.getVideoURL().isEmpty()) {
-          releasePlayer();
           initializePlayer(Uri.parse(step.getVideoURL()));
         }
       }
@@ -96,6 +95,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
 
   private void releasePlayer() {
     if (exoPlayer != null) {
+      Log.d("DUNG", "releasePlayer: ");
       exoPlayer.stop();
       exoPlayer.release();
       exoPlayer = null;
