@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.ducdungdam.bakingapp">
 
@@ -12,6 +13,7 @@
     <activity android:name=".view.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
+
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
@@ -20,9 +22,31 @@
       android:parentActivityName=".view.MainActivity"
       android:theme="@style/AppTheme.NoActionBar"/>
     <activity
+      android:configChanges="orientation|screenSize|layoutDirection"
       android:name=".view.StepActivity"
       android:parentActivityName=".view.DetailActivity"
-      android:theme="@style/AppTheme.NoActionBar"
-      android:configChanges="orientation|screenSize|layoutDirection"/>
+      android:theme="@style/AppTheme.NoActionBar"/>
+
+    <activity android:name=".widgets.AppWidget.RecipeWidgetConfigurationActivity"
+      android:excludeFromRecents="true">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+      </intent-filter>
+    </activity>
+
+    <receiver android:name=".widgets.AppWidget.RecipeWidgetProvider">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+
+      <meta-data
+        android:name="android.appwidget.provider"
+        android:resource="@xml/recipe_widget_provider_info"/>
+    </receiver>
+
+    <service
+      android:name=".widgets.AppWidget.RecipeWidgetService"
+      android:permission="android.permission.BIND_REMOTEVIEWS" />
   </application>
+
 </manifest>

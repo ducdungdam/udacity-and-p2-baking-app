@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Ingredient implements Parcelable {
 
-  private float quantity;
-  private String measure;
+  private final float quantity;
+  private final String measure;
   @SerializedName("ingredient")
-  private String name;
+  private final String name;
 
   private Ingredient(Parcel in) {
     quantity = in.readFloat();

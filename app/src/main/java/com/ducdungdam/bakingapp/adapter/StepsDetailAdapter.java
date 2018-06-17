@@ -14,7 +14,7 @@ import java.util.List;
 
 public class StepsDetailAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-  private List<Step> steps;
+  private final List<Step> steps;
   private OnClickListener onClickListener;
 
   public StepsDetailAdapter(List<Step> steps) {
@@ -56,7 +56,7 @@ public class StepsDetailAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   private class StepViewHolder extends ViewHolder implements View.OnClickListener {
 
-    ViewDetailStepItemBinding rootView;
+    final ViewDetailStepItemBinding rootView;
 
     StepViewHolder(View itemView) {
       super(itemView);

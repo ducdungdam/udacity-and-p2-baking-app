@@ -1,4 +1,4 @@
-package com.ducdungdam.bakingapp.adapter;
+package com.ducdungdam.bakingapp.widgets.AppWidget;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
@@ -9,16 +9,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import com.ducdungdam.bakingapp.R;
-import com.ducdungdam.bakingapp.databinding.ViewRecipeListItemBinding;
+import com.ducdungdam.bakingapp.databinding.ViewWidgetConfigurationRecipeListItemBinding;
 import com.ducdungdam.bakingapp.model.Recipe;
 import java.util.List;
 
-public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class RecipeWidgetConfigurationAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   private List<Recipe> recipes;
   private OnItemClickListener onItemClickListener = null;
 
-  public RecipeAdapter(List<Recipe> recipes) {
+  public RecipeWidgetConfigurationAdapter(List<Recipe> recipes) {
     super();
     this.recipes = recipes;
   }
@@ -27,7 +27,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
   @Override
   public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     return new RecipeViewHolder(LayoutInflater.from(parent.getContext())
-        .inflate(R.layout.view_recipe_list_item, parent, false));
+        .inflate(R.layout.view_widget_configuration_recipe_list_item, parent, false));
   }
 
   @Override
@@ -45,11 +45,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
   }
 
-  public void setRecipeList(List<Recipe> recipes) {
-    this.recipes = recipes;
-    notifyDataSetChanged();
-  }
-
   public void setOnItemClickListener(OnItemClickListener l) {
     this.onItemClickListener = l;
   }
@@ -61,7 +56,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   class RecipeViewHolder extends ViewHolder implements OnClickListener {
 
-    final ViewRecipeListItemBinding rootView;
+    final ViewWidgetConfigurationRecipeListItemBinding rootView;
 
     RecipeViewHolder(View itemView) {
       super(itemView);

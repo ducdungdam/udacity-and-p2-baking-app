@@ -13,7 +13,7 @@ import com.ducdungdam.bakingapp.model.Ingredient;
 import java.util.List;
 
 public class IngredientDetailAdapter extends RecyclerView.Adapter<ViewHolder> {
-  private List<Ingredient> ingredients;
+  private final List<Ingredient> ingredients;
 
   public IngredientDetailAdapter(List<Ingredient> ingredients) {
     super();
@@ -42,7 +42,7 @@ public class IngredientDetailAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   private class IngredientViewHolder extends ViewHolder {
 
-    ViewDetailIngredientItemBinding rootView;
+    final ViewDetailIngredientItemBinding rootView;
 
     IngredientViewHolder(View itemView) {
       super(itemView);

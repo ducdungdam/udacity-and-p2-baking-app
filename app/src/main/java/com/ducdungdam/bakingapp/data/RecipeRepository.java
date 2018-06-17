@@ -3,9 +3,7 @@ package com.ducdungdam.bakingapp.data;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import com.ducdungdam.bakingapp.model.Recipe;
-import com.google.gson.Gson;
 import java.util.List;
 import java.util.concurrent.Executors;
 import retrofit2.Call;
@@ -59,7 +57,6 @@ public class RecipeRepository {
 
       @Override
       public void onFailure(@NonNull Call<List<Recipe>> call, @NonNull Throwable t) {
-        Log.e(TAG, "Retrofit onFailure: " + t.getMessage());
       }
     });
     return recipes;

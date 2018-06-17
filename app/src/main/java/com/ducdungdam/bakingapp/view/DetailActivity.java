@@ -25,7 +25,7 @@ public class DetailActivity extends AppCompatActivity implements OnStepClickList
   private boolean isTwoPane = false;
   private DetailViewModel model;
 
-  ActivityDetailBinding rootView;
+  private ActivityDetailBinding rootView;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class DetailActivity extends AppCompatActivity implements OnStepClickList
     }
   }
 
-  void startStepActivity(List<Step> steps, int position) {
+  private void startStepActivity(List<Step> steps, int position) {
     Intent intent = new Intent(this, StepActivity.class);
     intent.putParcelableArrayListExtra(EXTRA_STEPS, (ArrayList<Step>) steps);
     intent.putExtra(EXTRA_CURRENT_STEP_POSITION, position);

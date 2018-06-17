@@ -13,7 +13,7 @@ import com.ducdungdam.bakingapp.adapter.RecipeAdapter.OnItemClickListener;
 import com.ducdungdam.bakingapp.databinding.ActivityMainBinding;
 import com.ducdungdam.bakingapp.model.Recipe;
 import com.ducdungdam.bakingapp.viewmodel.MainViewModel;
-import com.ducdungdam.bakingapp.widget.RecipeItemDecoration;
+import com.ducdungdam.bakingapp.widgets.RecipeItemDecoration;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {

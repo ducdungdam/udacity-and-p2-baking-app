@@ -1,4 +1,4 @@
-package com.ducdungdam.bakingapp.widget;
+package com.ducdungdam.bakingapp.widgets;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -7,11 +7,11 @@ import android.support.v7.widget.RecyclerView.ItemDecoration;
 import android.view.View;
 import com.ducdungdam.bakingapp.R;
 
-public class IngredientItemDecoration extends ItemDecoration {
+public class StepItemDecoration extends ItemDecoration {
 
   private final int paddingVertical;
 
-  public IngredientItemDecoration(Context context) {
+  public StepItemDecoration(Context context) {
     this.paddingVertical = (int) context.getResources().getDimension(R.dimen.recipe_item_spacing);
   }
 

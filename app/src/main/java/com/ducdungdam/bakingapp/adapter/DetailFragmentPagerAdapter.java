@@ -12,7 +12,7 @@ import com.ducdungdam.bakingapp.view.DetailStepsFragment.OnStepClickListener;
 
 public class DetailFragmentPagerAdapter extends FragmentPagerAdapter {
 
-  private Context mContext;
+  private final Context mContext;
   private OnStepClickListener onStepClickListener;
 
   public DetailFragmentPagerAdapter(Context context, FragmentManager fm) {

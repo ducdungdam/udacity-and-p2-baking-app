@@ -1,4 +1,4 @@
-package com.ducdungdam.bakingapp.widget;
+package com.ducdungdam.bakingapp.widgets;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

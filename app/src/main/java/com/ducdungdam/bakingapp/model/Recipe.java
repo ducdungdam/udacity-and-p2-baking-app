@@ -13,12 +13,12 @@ import java.util.List;
 
 public class Recipe implements Parcelable{
 
-  private int id;
-  private String name;
-  private List<Ingredient> ingredients;
-  private List<Step> steps;
-  private int servings;
-  private String image;
+  private final int id;
+  private final String name;
+  private final List<Ingredient> ingredients;
+  private final List<Step> steps;
+  private final int servings;
+  private final String image;
 
   private Recipe(Parcel in) {
     id = in.readInt();

@@ -6,5 +6,5 @@ package com.ducdungdam.bakingapp.utilities;
  * Class for all global DataBinding functions
  */
 
-public class DataBindingUtils {
+class DataBindingUtils {
 }

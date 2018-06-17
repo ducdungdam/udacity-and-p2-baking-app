@@ -1,4 +1,4 @@
-package com.ducdungdam.bakingapp.widget;
+package com.ducdungdam.bakingapp.widgets;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -23,7 +23,7 @@ public class RecipeItemDecoration extends ItemDecoration {
       RecyclerView.State state) {
     int position = parent.getChildAdapterPosition(view);
     int left = 0;
-    int top = 0;
+    int top;
     int right = 0;
     int bottom = 0;
 

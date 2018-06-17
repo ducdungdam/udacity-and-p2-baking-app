@@ -13,13 +13,13 @@ import android.view.View;
 import com.ducdungdam.bakingapp.R;
 import com.ducdungdam.bakingapp.databinding.ActivityStepBinding;
 import com.ducdungdam.bakingapp.model.Step;
-import com.ducdungdam.bakingapp.viewmodel.DetailViewModel;
+import com.ducdungdam.bakingapp.viewmodel.StepViewModel;
 import java.util.List;
 
 public class StepActivity extends AppCompatActivity implements View.OnClickListener {
 
-  ActivityStepBinding rootView;
-  DetailViewModel viewModel;
+  private ActivityStepBinding rootView;
+  private StepViewModel viewModel;
 
 
   @Override
@@ -41,7 +41,7 @@ public class StepActivity extends AppCompatActivity implements View.OnClickListe
       actionBar.setDisplayShowTitleEnabled(false);
     }
 
-    viewModel = ViewModelProviders.of(this).get(DetailViewModel.class);
+    viewModel = ViewModelProviders.of(this).get(StepViewModel.class);
     viewModel.getSteps().setValue(steps);
     viewModel.getCurrentPosition().setValue(currentStepPos);
 
@@ -63,11 +63,6 @@ public class StepActivity extends AppCompatActivity implements View.OnClickListe
         .add(rootView.stepContainer.getId(), new StepFragment())
         .commit();
 
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
   }
 
   @Override

@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,21 +17,26 @@ import com.ducdungdam.bakingapp.databinding.FragmentDetailStepsBinding;
 import com.ducdungdam.bakingapp.model.Recipe;
 import com.ducdungdam.bakingapp.model.Step;
 import com.ducdungdam.bakingapp.viewmodel.DetailViewModel;
-import com.ducdungdam.bakingapp.widget.StepItemDecoration;
+import com.ducdungdam.bakingapp.widgets.StepItemDecoration;
 import java.util.List;
 
 public class DetailStepsFragment extends Fragment implements OnClickListener {
 
-  FragmentDetailStepsBinding rootView;
-  OnStepClickListener onStepClickListener;
+  private FragmentDetailStepsBinding rootView;
+  private OnStepClickListener onStepClickListener;
 
 
   public DetailStepsFragment() {
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+  public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
+
+    if (getActivity() == null) {
+      return null;
+    }
+
     final DetailViewModel model = ViewModelProviders.of(getActivity()).get(DetailViewModel.class);
 
     rootView = DataBindingUtil.inflate(
@@ -40,10 +46,10 @@ public class DetailStepsFragment extends Fragment implements OnClickListener {
       @Override
       public void onChanged(@Nullable Recipe recipe) {
         StepsDetailAdapter adapter = new StepsDetailAdapter(
-            model.getRecipe().getValue().getSteps());
+            recipe != null ? recipe.getSteps() : null);
         adapter.setOnClickListener(DetailStepsFragment.this);
         rootView.rvStepsList.setAdapter(adapter);
-        rootView.rvStepsList.addItemDecoration(new StepItemDecoration(getContext()));
+        rootView.rvStepsList.addItemDecoration(new StepItemDecoration(getActivity()));
       }
     });
 
