@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import com.ducdungdam.bakingapp.R;
 import com.ducdungdam.bakingapp.adapter.RecipeAdapter;
 import com.ducdungdam.bakingapp.adapter.RecipeAdapter.OnItemClickListener;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onChanged(@Nullable List<Recipe> recipes) {
         if (recipes != null) {
+          rootView.rvRecipeList.setVisibility(View.VISIBLE);
+          rootView.progressBar.setVisibility(View.GONE);
           if (rootView.rvRecipeList.getAdapter() == null) {
             RecipeAdapter adapter = new RecipeAdapter(recipes);
             adapter.setOnItemClickListener(new OnItemClickListener() {
