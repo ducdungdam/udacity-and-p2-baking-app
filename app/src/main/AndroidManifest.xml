@@ -27,14 +27,15 @@
       android:parentActivityName=".view.DetailActivity"
       android:theme="@style/AppTheme.NoActionBar"/>
 
-    <activity android:name=".widgets.AppWidget.RecipeWidgetConfigurationActivity"
-      android:excludeFromRecents="true">
+    <activity android:name=".widgets.appwidget.RecipeWidgetConfigurationActivity"
+      android:excludeFromRecents="true"
+      android:launchMode="singleInstance">
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
       </intent-filter>
     </activity>
 
-    <receiver android:name=".widgets.AppWidget.RecipeWidgetProvider">
+    <receiver android:name=".widgets.appwidget.RecipeWidgetProvider">
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
       </intent-filter>
@@ -45,7 +46,7 @@
     </receiver>
 
     <service
-      android:name=".widgets.AppWidget.RecipeWidgetService"
+      android:name=".widgets.appwidget.RecipeWidgetService"
       android:permission="android.permission.BIND_REMOTEVIEWS" />
   </application>
 

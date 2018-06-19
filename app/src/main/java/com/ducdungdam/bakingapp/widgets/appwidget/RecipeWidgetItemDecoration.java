@@ -1,4 +1,4 @@
-package com.ducdungdam.bakingapp.widgets.AppWidget;
+package com.ducdungdam.bakingapp.widgets.appwidget;
 
 import android.content.Context;
 import android.graphics.Rect;
