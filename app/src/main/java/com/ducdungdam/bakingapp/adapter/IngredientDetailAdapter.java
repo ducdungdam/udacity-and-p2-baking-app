@@ -12,6 +12,10 @@ import com.ducdungdam.bakingapp.databinding.ViewDetailIngredientItemBinding;
 import com.ducdungdam.bakingapp.model.Ingredient;
 import java.util.List;
 
+/**
+ * Adapter for List of Ingredients in {@link com.ducdungdam.bakingapp.view.DetailActivity}
+ */
+
 public class IngredientDetailAdapter extends RecyclerView.Adapter<ViewHolder> {
   private final List<Ingredient> ingredients;
 

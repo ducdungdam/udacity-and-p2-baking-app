@@ -9,6 +9,9 @@ import com.ducdungdam.bakingapp.view.DetailIngredientsFragment;
 import com.ducdungdam.bakingapp.view.DetailStepsFragment;
 import com.ducdungdam.bakingapp.view.DetailStepsFragment.OnStepClickListener;
 
+/**
+ * Adapter for ViewPager in {@link com.ducdungdam.bakingapp.view.DetailActivity} on mobile screen
+ */
 
 public class DetailFragmentPagerAdapter extends FragmentPagerAdapter {
 

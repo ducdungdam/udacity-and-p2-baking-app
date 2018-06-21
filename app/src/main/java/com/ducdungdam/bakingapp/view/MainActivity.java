@@ -15,7 +15,7 @@ import com.ducdungdam.bakingapp.R;
 import com.ducdungdam.bakingapp.adapter.RecipeAdapter;
 import com.ducdungdam.bakingapp.adapter.RecipeAdapter.OnItemClickListener;
 import com.ducdungdam.bakingapp.databinding.ActivityMainBinding;
-import com.ducdungdam.bakingapp.idlingResource.SimpleIdlingResource;
+import com.ducdungdam.bakingapp.idlingResource.RecipeIdlingResource;
 import com.ducdungdam.bakingapp.model.Recipe;
 import com.ducdungdam.bakingapp.viewmodel.MainViewModel;
 import com.ducdungdam.bakingapp.widgets.RecipeItemDecoration;
@@ -28,16 +28,16 @@ public class MainActivity extends AppCompatActivity {
 
   // The Idling Resource which will be null in production.
   @Nullable
-  private SimpleIdlingResource mIdlingResource;
+  private RecipeIdlingResource mIdlingResource;
 
   /**
-   * Only called from test, creates and returns a new {@link SimpleIdlingResource}.
+   * Only called from test, creates and returns a new {@link RecipeIdlingResource}.
    */
   @VisibleForTesting
   @NonNull
   public IdlingResource getIdlingResource() {
     if (mIdlingResource == null) {
-      mIdlingResource = new SimpleIdlingResource();
+      mIdlingResource = new RecipeIdlingResource();
     }
     return mIdlingResource;
   }

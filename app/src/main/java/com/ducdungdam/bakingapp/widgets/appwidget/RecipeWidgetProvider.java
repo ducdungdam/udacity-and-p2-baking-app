@@ -13,6 +13,7 @@ import com.google.gson.Gson;
  * Implementation of App Widget functionality.
  */
 public class RecipeWidgetProvider extends AppWidgetProvider {
+
   final static String EXTRA_RECIPE_JSON = "extra_recipe_json";
 
   static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,

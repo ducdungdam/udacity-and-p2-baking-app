@@ -3,6 +3,10 @@ package com.ducdungdam.bakingapp.utilities;
 import com.ducdungdam.bakingapp.model.Recipe;
 import com.google.gson.Gson;
 
+/**
+ * Provides Fake Data for testing app
+ */
+
 public class FakeDataUtils {
   public static Recipe getRecipe(){
     String json = "{\n"

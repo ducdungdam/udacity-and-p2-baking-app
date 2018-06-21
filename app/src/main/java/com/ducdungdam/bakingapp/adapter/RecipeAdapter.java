@@ -13,6 +13,10 @@ import com.ducdungdam.bakingapp.databinding.ViewRecipeListItemBinding;
 import com.ducdungdam.bakingapp.model.Recipe;
 import java.util.List;
 
+/**
+ * Adapter for List of Recipes in {@link com.ducdungdam.bakingapp.view.MainActivity}
+ */
+
 public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   private List<Recipe> recipes;

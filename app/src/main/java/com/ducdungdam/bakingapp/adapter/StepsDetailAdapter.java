@@ -12,6 +12,10 @@ import com.ducdungdam.bakingapp.databinding.ViewDetailStepItemBinding;
 import com.ducdungdam.bakingapp.model.Step;
 import java.util.List;
 
+/**
+ * Adapter for List of Steps in {@link com.ducdungdam.bakingapp.view.DetailActivity}
+ */
+
 public class StepsDetailAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   private final List<Step> steps;

@@ -4,6 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * POJO of Ingredient retrieving by {@link com.ducdungdam.bakingapp.data.RecipeRepository}
+ */
+
 public class Ingredient implements Parcelable {
 
   private final float quantity;

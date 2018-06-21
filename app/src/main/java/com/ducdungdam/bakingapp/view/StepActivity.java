@@ -21,7 +21,6 @@ public class StepActivity extends AppCompatActivity implements View.OnClickListe
   private ActivityStepBinding rootView;
   private StepViewModel viewModel;
 
-
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -48,7 +47,8 @@ public class StepActivity extends AppCompatActivity implements View.OnClickListe
     viewModel.getCurrentPosition().observe(this, new Observer<Integer>() {
       @Override
       public void onChanged(@Nullable Integer currentPosition) {
-        if (viewModel.getSteps().getValue() == null || currentPosition == null || viewModel.getSteps().getValue().get(currentPosition) == null) {
+        if (viewModel.getSteps().getValue() == null || currentPosition == null
+            || viewModel.getSteps().getValue().get(currentPosition) == null) {
           return;
         }
 
@@ -84,8 +84,7 @@ public class StepActivity extends AppCompatActivity implements View.OnClickListe
           currentPosition < viewModel.getSteps().getValue().size() - 1) {
         viewModel.getCurrentPosition().setValue(currentPosition + 1);
       }
-    }
-    else if (v == rootView.tvPreviousStep) {
+    } else if (v == rootView.tvPreviousStep) {
       Integer currentPosition = viewModel.getCurrentPosition().getValue();
       if (currentPosition != null &&
           viewModel.getSteps().getValue() != null &&
