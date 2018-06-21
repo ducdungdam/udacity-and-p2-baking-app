@@ -5,13 +5,17 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import com.ducdungdam.bakingapp.R;
 import com.ducdungdam.bakingapp.adapter.RecipeAdapter;
 import com.ducdungdam.bakingapp.adapter.RecipeAdapter.OnItemClickListener;
 import com.ducdungdam.bakingapp.databinding.ActivityMainBinding;
+import com.ducdungdam.bakingapp.idlingResource.SimpleIdlingResource;
 import com.ducdungdam.bakingapp.model.Recipe;
 import com.ducdungdam.bakingapp.viewmodel.MainViewModel;
 import com.ducdungdam.bakingapp.widgets.RecipeItemDecoration;
@@ -22,10 +26,31 @@ public class MainActivity extends AppCompatActivity {
 
   private ActivityMainBinding rootView;
 
+  // The Idling Resource which will be null in production.
+  @Nullable
+  private SimpleIdlingResource mIdlingResource;
+
+  /**
+   * Only called from test, creates and returns a new {@link SimpleIdlingResource}.
+   */
+  @VisibleForTesting
+  @NonNull
+  public IdlingResource getIdlingResource() {
+    if (mIdlingResource == null) {
+      mIdlingResource = new SimpleIdlingResource();
+    }
+    return mIdlingResource;
+  }
+
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     rootView = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+    // Get the IdlingResource instance
+    if (mIdlingResource != null) {
+      mIdlingResource.setIdleState(false);
+    }
 
     MainViewModel model = ViewModelProviders.of(this).get(MainViewModel.class);
     model.getRecipes().observe(this, new Observer<List<Recipe>>() {
@@ -34,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
         if (recipes != null) {
           rootView.rvRecipeList.setVisibility(View.VISIBLE);
           rootView.progressBar.setVisibility(View.GONE);
+          if (mIdlingResource != null) {
+            mIdlingResource.setIdleState(true);
+          }
           if (rootView.rvRecipeList.getAdapter() == null) {
             RecipeAdapter adapter = new RecipeAdapter(recipes);
             adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -48,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             RecipeAdapter adapter = (RecipeAdapter) rootView.rvRecipeList.getAdapter();
             adapter.setRecipeList(recipes);
           }
+
         }
       }
     });

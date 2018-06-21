@@ -25,8 +25,6 @@ public class DetailActivity extends AppCompatActivity implements OnStepClickList
   private boolean isTwoPane = false;
   private DetailViewModel model;
 
-  private ActivityDetailBinding rootView;
-
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -34,7 +32,7 @@ public class DetailActivity extends AppCompatActivity implements OnStepClickList
     Intent intent = getIntent();
     final Recipe recipe = intent.getParcelableExtra(MainActivity.EXTRA_RECIPE);
 
-    rootView = DataBindingUtil.setContentView(this, R.layout.activity_detail);
+    ActivityDetailBinding rootView = DataBindingUtil.setContentView(this, R.layout.activity_detail);
 
     setSupportActionBar(rootView.toolbar);
     ActionBar actionBar = getSupportActionBar();

@@ -85,6 +85,6 @@
       android:layout_gravity="center_horizontal|bottom"
       android:text="@string/step_next_text"
       android:visibility="@{currentPosition == (totalCount - 1) ? View.GONE : View.VISIBLE}"
-      app:layout_behavior="com.ducdungdam.bakingapp.widget.NextStepButtonBehavior"/>
+      app:layout_behavior="com.ducdungdam.bakingapp.widgets.NextStepButtonBehavior"/>
   </android.support.design.widget.CoordinatorLayout>
 </layout>
