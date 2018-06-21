@@ -1,5 +1,4 @@
 <resources>
-
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     <!-- Customize your theme here. -->
@@ -15,9 +14,4 @@
     <item name="colorAccent">@color/colorSecondary</item>
     <item name="android:textColor">@color/colorTextPrimary</item>
   </style>
-
-  <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
-  </style>
-
-
 </resources>

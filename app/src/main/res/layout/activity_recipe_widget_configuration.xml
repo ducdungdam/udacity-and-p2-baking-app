@@ -2,7 +2,6 @@
 <layout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
-  <data></data>
   <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -13,7 +12,7 @@
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
       android:layout_marginEnd="8dp"
-      android:text="Choose a recipe"
+      android:text="@string/widget_configuration_title"
       android:textAppearance="@style/TextAppearance.AppCompat.Title"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

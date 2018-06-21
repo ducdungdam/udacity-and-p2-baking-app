@@ -10,6 +10,6 @@
 
   <string name="step_previous_text">Missed something?\nGo Back to previous step</string>
   <string name="step_next_text">Next step</string>
-  <string name="appwidget_text">EXAMPLE</string>
-  <string name="add_widget">Add widget</string>
+  <string name="widget_recipe_title">Recipe</string>
+  <string name="widget_configuration_title">Choose a recipe</string>
 </resources>
