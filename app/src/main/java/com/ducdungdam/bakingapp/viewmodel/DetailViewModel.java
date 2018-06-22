@@ -6,7 +6,8 @@ import com.ducdungdam.bakingapp.model.Recipe;
 import com.ducdungdam.bakingapp.model.Step;
 import java.util.List;
 
-public class DetailViewModel extends ViewModel{
+public class DetailViewModel extends ViewModel {
+
   private MutableLiveData<Recipe> recipe;
   private MutableLiveData<List<Step>> steps;
   private MutableLiveData<Integer> currentPosition;
@@ -34,7 +35,8 @@ public class DetailViewModel extends ViewModel{
   }
 
   public Step getStep() {
-    if (steps.getValue() == null || currentPosition.getValue() == null) {
+    if (steps == null || steps.getValue() == null || currentPosition == null
+        || currentPosition.getValue() == null) {
       return null;
     }
     return steps.getValue().get(currentPosition.getValue());

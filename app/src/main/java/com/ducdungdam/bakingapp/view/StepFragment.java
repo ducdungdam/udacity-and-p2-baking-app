@@ -17,6 +17,7 @@ import com.ducdungdam.bakingapp.databinding.FragmentStepBinding;
 import com.ducdungdam.bakingapp.model.Step;
 import com.ducdungdam.bakingapp.viewmodel.DetailViewModel;
 import com.ducdungdam.bakingapp.viewmodel.StepViewModel;
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -37,11 +38,19 @@ import com.google.android.exoplayer2.util.Util;
 
 public class StepFragment extends Fragment implements Player.EventListener {
 
+  public final static String KEY_AUTO_PLAY = "key_auto_play";
+  public final static String KEY_POSITION = "key_position";
+  public final static String KEY_WINDOW = "key_window";
+
   private FragmentStepBinding rootView;
   private Context context;
 
+  private Step step;
 
   private SimpleExoPlayer exoPlayer;
+  private boolean startPlaying = false;
+  private long startPosition = 0;
+  private int startWindow = 0;
 
   public StepFragment() {
   }
@@ -59,7 +68,11 @@ public class StepFragment extends Fragment implements Player.EventListener {
     rootView = DataBindingUtil.inflate(
         inflater, R.layout.fragment_step, container, false);
 
-    final DetailViewModel detailModel = ViewModelProviders.of(getActivity()).get(DetailViewModel.class);
+    final DetailViewModel detailModel = ViewModelProviders.of(getActivity())
+        .get(DetailViewModel.class);
+
+    step = detailModel.getStep();
+
     detailModel.getCurrentPosition().observe(this, new Observer<Integer>() {
       @Override
       public void onChanged(@Nullable Integer currentPosition) {
@@ -68,13 +81,8 @@ public class StepFragment extends Fragment implements Player.EventListener {
           return;
         }
 
-        Step step = detailModel.getSteps().getValue().get(currentPosition);
+        step = detailModel.getSteps().getValue().get(currentPosition);
         rootView.setStep(step);
-
-        releasePlayer();
-        if (step.getVideoURL() != null && !step.getVideoURL().isEmpty()) {
-          initializePlayer(Uri.parse(step.getVideoURL()));
-        }
       }
     });
 
@@ -87,37 +95,45 @@ public class StepFragment extends Fragment implements Player.EventListener {
           return;
         }
 
-        Step step = stepModel.getSteps().getValue().get(currentPosition);
+        step = stepModel.getSteps().getValue().get(currentPosition);
         rootView.setStep(step);
-
-        releasePlayer();
-        if (step.getVideoURL() != null && !step.getVideoURL().isEmpty()) {
-          initializePlayer(Uri.parse(step.getVideoURL()));
-        }
       }
     });
+
+    if (savedInstanceState != null) {
+      startPlaying = savedInstanceState.getBoolean(KEY_AUTO_PLAY);
+      startPosition = savedInstanceState.getLong(KEY_POSITION);
+      startWindow = savedInstanceState.getInt(KEY_WINDOW);
+    }
 
     return rootView.getRoot();
   }
 
-  private void initializePlayer(Uri mediaUri) {
-    if (exoPlayer == null) {
+  private void initializePlayer() {
+    if (exoPlayer == null && step != null && step.getVideoURL() != null && !step.getVideoURL()
+        .isEmpty()) {
       // Create an instance of the ExoPlayer.
       TrackSelector trackSelector = new DefaultTrackSelector();
       LoadControl loadControl = new DefaultLoadControl();
-      exoPlayer = ExoPlayerFactory.newSimpleInstance(new DefaultRenderersFactory(getContext()), trackSelector, loadControl);
+      exoPlayer = ExoPlayerFactory
+          .newSimpleInstance(new DefaultRenderersFactory(getContext()), trackSelector, loadControl);
       rootView.playerView.setPlayer(exoPlayer);
 
-      // Set the ExoPlayer.EventListener to this activity.
       exoPlayer.addListener(this);
 
       // Prepare the MediaSource.
       String userAgent = Util.getUserAgent(getContext(), "BakingApp");
 
       DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(context, userAgent);
-      MediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(mediaUri);
+      Uri mediaUri = Uri.parse(step.getVideoURL());
+      MediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory)
+          .createMediaSource(mediaUri);
       exoPlayer.prepare(mediaSource);
-      exoPlayer.setPlayWhenReady(false);
+
+      exoPlayer.setPlayWhenReady(startPlaying);
+      if (startWindow != C.INDEX_UNSET) {
+        exoPlayer.seekTo(startWindow, startPosition);
+      }
     }
   }
 
@@ -126,6 +142,45 @@ public class StepFragment extends Fragment implements Player.EventListener {
       exoPlayer.stop();
       exoPlayer.release();
       exoPlayer = null;
+    }
+  }
+
+  @Override
+  public void onSaveInstanceState(@NonNull Bundle outState) {
+    outState.putBoolean(KEY_AUTO_PLAY, exoPlayer.getPlayWhenReady());
+    outState.putLong(KEY_POSITION, Math.max(0, exoPlayer.getContentPosition()));
+    outState.putInt(KEY_WINDOW, Math.max(0, exoPlayer.getCurrentWindowIndex()));
+  }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+    if (Util.SDK_INT > 23) {
+      initializePlayer();
+    }
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    if (Util.SDK_INT <= 23 || exoPlayer == null) {
+      initializePlayer();
+    }
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    if (Util.SDK_INT <= 23) {
+      releasePlayer();
+    }
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    if (Util.SDK_INT > 23) {
+      releasePlayer();
     }
   }
 

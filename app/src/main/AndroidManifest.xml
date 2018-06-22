@@ -22,7 +22,6 @@
       android:parentActivityName=".view.MainActivity"
       android:theme="@style/AppTheme.NoActionBar"/>
     <activity
-      android:configChanges="orientation|screenSize|layoutDirection"
       android:name=".view.StepActivity"
       android:parentActivityName=".view.DetailActivity"
       android:theme="@style/AppTheme.NoActionBar"/>

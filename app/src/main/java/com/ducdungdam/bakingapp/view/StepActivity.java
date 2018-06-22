@@ -58,11 +58,6 @@ public class StepActivity extends AppCompatActivity implements View.OnClickListe
         rootView.setTotalCount(viewModel.getSteps().getValue().size());
       }
     });
-
-    getSupportFragmentManager().beginTransaction()
-        .add(rootView.stepContainer.getId(), new StepFragment())
-        .commit();
-
   }
 
   @Override
