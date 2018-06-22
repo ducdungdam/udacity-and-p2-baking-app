@@ -14,11 +14,15 @@ public class DataBindingUtils {
    */
   @BindingAdapter("setStepThumbnail")
   public static void setStepThumbnail(ImageView view, String thumbnailUrl) {
-    Picasso.with(view.getContext())
-        .load(thumbnailUrl)
-        .error(android.R.color.transparent)
-        .placeholder(R.drawable.img_recipe_card)
-        .into(view);
+    try {
+      Picasso.with(view.getContext())
+          .load(thumbnailUrl)
+          .error(R.drawable.img_recipe_card)
+          .placeholder(R.drawable.img_recipe_card)
+          .into(view);
+    } catch (IllegalArgumentException e) {
+      Picasso.with(view.getContext()).load(R.drawable.img_recipe_card);
+    }
   }
 
 }

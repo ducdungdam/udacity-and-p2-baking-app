@@ -25,10 +25,6 @@ public class StepActivity extends AppCompatActivity implements View.OnClickListe
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    Intent intent = getIntent();
-    final List<Step> steps = intent.getParcelableArrayListExtra(DetailActivity.EXTRA_STEPS);
-    final int currentStepPos = intent.getIntExtra(DetailActivity.EXTRA_CURRENT_STEP_POSITION, 0);
-
     rootView = DataBindingUtil.setContentView(this, R.layout.activity_step);
     rootView.btnNextStep.setOnClickListener(this);
     rootView.tvPreviousStep.setOnClickListener(this);
@@ -41,8 +37,14 @@ public class StepActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     viewModel = ViewModelProviders.of(this).get(StepViewModel.class);
-    viewModel.getSteps().setValue(steps);
-    viewModel.getCurrentPosition().setValue(currentStepPos);
+
+    if (savedInstanceState == null) {
+      Intent intent = getIntent();
+      final List<Step> steps = intent.getParcelableArrayListExtra(DetailActivity.EXTRA_STEPS);
+      final int currentStepPos = intent.getIntExtra(DetailActivity.EXTRA_CURRENT_STEP_POSITION, 0);
+      viewModel.getSteps().setValue(steps);
+      viewModel.getCurrentPosition().setValue(currentStepPos);
+    }
 
     viewModel.getCurrentPosition().observe(this, new Observer<Integer>() {
       @Override

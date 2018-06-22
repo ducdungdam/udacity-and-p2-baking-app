@@ -2,6 +2,7 @@ package com.ducdungdam.bakingapp.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import com.google.gson.annotations.SerializedName;
 
 /**
  *
@@ -13,7 +14,9 @@ public class Step implements Parcelable{
   private final int id;
   private final String shortDescription;
   private final String description;
+  @SerializedName("videoURL")
   private final String videoUrl;
+  @SerializedName("thumbnailURL")
   private final String thumbnailUrl;
 
   private Step(Parcel in) {

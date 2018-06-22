@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +85,8 @@ public class StepFragment extends Fragment implements Player.EventListener {
 
         step = detailModel.getSteps().getValue().get(currentPosition);
         rootView.setStep(step);
+        releasePlayer();
+        initializePlayer();
       }
     });
 
@@ -98,6 +101,8 @@ public class StepFragment extends Fragment implements Player.EventListener {
 
         step = stepModel.getSteps().getValue().get(currentPosition);
         rootView.setStep(step);
+        releasePlayer();
+        initializePlayer();
       }
     });
 
@@ -111,7 +116,8 @@ public class StepFragment extends Fragment implements Player.EventListener {
   }
 
   private void initializePlayer() {
-    if (exoPlayer == null &&  step != null && TextUtils.isEmpty(step.getVideoUrl())) {
+    if (exoPlayer == null && step != null && !TextUtils.isEmpty(step.getVideoUrl())) {
+      Log.d("DUNG", "initializePlayer: ");
       // Create an instance of the ExoPlayer.
       TrackSelector trackSelector = new DefaultTrackSelector();
       LoadControl loadControl = new DefaultLoadControl();
@@ -141,15 +147,20 @@ public class StepFragment extends Fragment implements Player.EventListener {
     if (exoPlayer != null) {
       exoPlayer.stop();
       exoPlayer.release();
+      startPlaying = false;
+      startPosition = 0;
+      startWindow = 0;
       exoPlayer = null;
     }
   }
 
   @Override
   public void onSaveInstanceState(@NonNull Bundle outState) {
-    outState.putBoolean(KEY_AUTO_PLAY, exoPlayer.getPlayWhenReady());
-    outState.putLong(KEY_POSITION, Math.max(0, exoPlayer.getContentPosition()));
-    outState.putInt(KEY_WINDOW, Math.max(0, exoPlayer.getCurrentWindowIndex()));
+    if (exoPlayer != null) {
+      outState.putBoolean(KEY_AUTO_PLAY, exoPlayer.getPlayWhenReady());
+      outState.putLong(KEY_POSITION, Math.max(0, exoPlayer.getContentPosition()));
+      outState.putInt(KEY_WINDOW, Math.max(0, exoPlayer.getCurrentWindowIndex()));
+    }
   }
 
   @Override
