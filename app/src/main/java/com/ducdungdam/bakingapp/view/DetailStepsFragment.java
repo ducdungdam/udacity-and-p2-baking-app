@@ -2,6 +2,7 @@ package com.ducdungdam.bakingapp.view;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,6 +28,16 @@ public class DetailStepsFragment extends Fragment implements OnClickListener {
 
 
   public DetailStepsFragment() {
+  }
+
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    try {
+      onStepClickListener = (OnStepClickListener) context;
+    } catch (ClassCastException e) {
+      throw new ClassCastException(context.toString() + "must implement OnStepClickListener");
+    }
   }
 
   @Override
@@ -59,7 +70,9 @@ public class DetailStepsFragment extends Fragment implements OnClickListener {
   @Override
   public void onClick(Step step, int position) {
     if (onStepClickListener != null) {
-      onStepClickListener.onStepClick(((StepsDetailAdapter) rootView.rvStepsList.getAdapter()).getSteps(), position);
+      onStepClickListener
+          .onStepClick(((StepsDetailAdapter) rootView.rvStepsList.getAdapter()).getSteps(),
+              position);
     }
   }
 
@@ -67,8 +80,8 @@ public class DetailStepsFragment extends Fragment implements OnClickListener {
     onStepClickListener = l;
   }
 
-
   public interface OnStepClickListener {
+
     void onStepClick(List<Step> steps, int position);
   }
 }

@@ -48,7 +48,6 @@ public class DetailActivity extends AppCompatActivity implements OnStepClickList
     if (rootView.svMasterFlow == null) {
       DetailFragmentPagerAdapter adapter = new DetailFragmentPagerAdapter(this,
           getSupportFragmentManager());
-      adapter.setOnStepClickListener(this);
       rootView.viewPager.setAdapter(adapter);
       rootView.tabLayoutRecipeDetail.setupWithViewPager(rootView.viewPager);
       if (actionBar != null) {
@@ -63,19 +62,15 @@ public class DetailActivity extends AppCompatActivity implements OnStepClickList
     }
   }
 
-  private void startStepActivity(List<Step> steps, int position) {
-    Intent intent = new Intent(this, StepActivity.class);
-    intent.putParcelableArrayListExtra(EXTRA_STEPS, (ArrayList<Step>) steps);
-    intent.putExtra(EXTRA_CURRENT_STEP_POSITION, position);
-    startActivity(intent);
-  }
-
   @Override
   public void onStepClick(List<Step> steps, int position) {
     if (isTwoPane) {
       model.getCurrentPosition().setValue(position);
     } else {
-      startStepActivity(steps, position);
+      Intent intent = new Intent(this, StepActivity.class);
+      intent.putParcelableArrayListExtra(EXTRA_STEPS, (ArrayList<Step>) steps);
+      intent.putExtra(EXTRA_CURRENT_STEP_POSITION, position);
+      startActivity(intent);
     }
   }
 }

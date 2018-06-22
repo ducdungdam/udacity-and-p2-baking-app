@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.ducdungdam.bakingapp.R;
 import com.ducdungdam.bakingapp.view.DetailIngredientsFragment;
 import com.ducdungdam.bakingapp.view.DetailStepsFragment;
-import com.ducdungdam.bakingapp.view.DetailStepsFragment.OnStepClickListener;
 
 /**
  * Adapter for ViewPager in {@link com.ducdungdam.bakingapp.view.DetailActivity} on mobile screen
@@ -16,7 +15,6 @@ import com.ducdungdam.bakingapp.view.DetailStepsFragment.OnStepClickListener;
 public class DetailFragmentPagerAdapter extends FragmentPagerAdapter {
 
   private final Context mContext;
-  private OnStepClickListener onStepClickListener;
 
   public DetailFragmentPagerAdapter(Context context, FragmentManager fm) {
     super(fm);
@@ -29,9 +27,6 @@ public class DetailFragmentPagerAdapter extends FragmentPagerAdapter {
       return new DetailIngredientsFragment();
     } else {
       DetailStepsFragment detailStepsFragment = new DetailStepsFragment();
-      if(onStepClickListener != null) {
-        detailStepsFragment.setOnStepClickListener(onStepClickListener);
-      }
       return detailStepsFragment;
     }
   }
@@ -51,9 +46,5 @@ public class DetailFragmentPagerAdapter extends FragmentPagerAdapter {
       default:
         return null;
     }
-  }
-
-  public void setOnStepClickListener(OnStepClickListener l) {
-    onStepClickListener = l;
   }
 }
