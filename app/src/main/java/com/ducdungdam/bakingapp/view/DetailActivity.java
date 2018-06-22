@@ -22,12 +22,14 @@ public class DetailActivity extends AppCompatActivity implements OnStepClickList
   public final static String EXTRA_CURRENT_STEP_POSITION = "extra_current_step_position";
   public final static String EXTRA_STEPS = "extra_steps";
 
-  private boolean isTwoPane = false;
+  private boolean isTablet;
   private DetailViewModel model;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    isTablet = getResources().getBoolean(R.bool.isTablet);
 
     Intent intent = getIntent();
     final Recipe recipe = intent.getParcelableExtra(MainActivity.EXTRA_RECIPE);
@@ -45,7 +47,7 @@ public class DetailActivity extends AppCompatActivity implements OnStepClickList
 
     model.getRecipe().setValue(recipe);
 
-    if (rootView.svMasterFlow == null) {
+    if (!isTablet) {
       DetailFragmentPagerAdapter adapter = new DetailFragmentPagerAdapter(this,
           getSupportFragmentManager());
       rootView.viewPager.setAdapter(adapter);
@@ -54,7 +56,6 @@ public class DetailActivity extends AppCompatActivity implements OnStepClickList
         actionBar.setDisplayShowTitleEnabled(false);
       }
     } else {
-      isTwoPane = true;
       ((DetailStepsFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_steps))
           .setOnStepClickListener(this);
       model.getSteps().setValue(recipe.getSteps());
@@ -64,7 +65,7 @@ public class DetailActivity extends AppCompatActivity implements OnStepClickList
 
   @Override
   public void onStepClick(List<Step> steps, int position) {
-    if (isTwoPane) {
+    if (isTablet) {
       model.getCurrentPosition().setValue(position);
     } else {
       Intent intent = new Intent(this, StepActivity.class);
