@@ -110,7 +110,7 @@ public class StepFragment extends Fragment implements Player.EventListener {
   }
 
   private void initializePlayer() {
-    if (exoPlayer == null && step != null && step.getVideoURL() != null && !step.getVideoURL()
+    if (exoPlayer == null && step != null && step.getVideoUrl() != null && !step.getVideoUrl()
         .isEmpty()) {
       // Create an instance of the ExoPlayer.
       TrackSelector trackSelector = new DefaultTrackSelector();
@@ -125,7 +125,7 @@ public class StepFragment extends Fragment implements Player.EventListener {
       String userAgent = Util.getUserAgent(getContext(), "BakingApp");
 
       DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(context, userAgent);
-      Uri mediaUri = Uri.parse(step.getVideoURL());
+      Uri mediaUri = Uri.parse(step.getVideoUrl());
       MediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory)
           .createMediaSource(mediaUri);
       exoPlayer.prepare(mediaSource);

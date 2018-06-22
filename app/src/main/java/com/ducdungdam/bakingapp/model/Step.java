@@ -13,15 +13,15 @@ public class Step implements Parcelable{
   private final int id;
   private final String shortDescription;
   private final String description;
-  private final String videoURL;
-  private final String thumbnailURL;
+  private final String videoUrl;
+  private final String thumbnailUrl;
 
   private Step(Parcel in) {
     id = in.readInt();
     shortDescription = in.readString();
     description = in.readString();
-    videoURL = in.readString();
-    thumbnailURL = in.readString();
+    videoUrl = in.readString();
+    thumbnailUrl = in.readString();
   }
 
   public static final Creator<Step> CREATOR = new Creator<Step>() {
@@ -48,12 +48,12 @@ public class Step implements Parcelable{
     return description;
   }
 
-  public String getVideoURL() {
-    return videoURL;
+  public String getVideoUrl() {
+    return videoUrl;
   }
 
-  public String getThumbnailURL() {
-    return thumbnailURL;
+  public String getThumbnailUrl() {
+    return thumbnailUrl;
   }
 
   @Override
@@ -66,7 +66,7 @@ public class Step implements Parcelable{
     dest.writeInt(id);
     dest.writeString(shortDescription);
     dest.writeString(description);
-    dest.writeString(videoURL);
-    dest.writeString(thumbnailURL);
+    dest.writeString(videoUrl);
+    dest.writeString(thumbnailUrl);
   }
 }
