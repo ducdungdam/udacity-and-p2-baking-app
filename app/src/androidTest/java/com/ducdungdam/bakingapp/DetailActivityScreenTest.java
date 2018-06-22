@@ -65,7 +65,7 @@ public class DetailActivityScreenTest {
     onView(withId(R.id.rv_steps_list))
         .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-    onView(withId(R.id.step_container))
+    onView(withId(R.id.fragment_steps))
         .check(matches(isDisplayed()));
   }
 }
